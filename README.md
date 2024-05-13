@@ -35,6 +35,10 @@
 1. 下载代码
 
     git clone https://github.com/Yordroid/jt809_server.git
+
+    国内用户用gitee会稳定一些
+
+    git clone https://gitee.com/Yordroid/jt809_server.git
 2. 进入jt809_server 目录
 
    go mod tidy
