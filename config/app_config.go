@@ -58,6 +58,7 @@ type SystemConfig struct {
 	httpBindPort  uint32 //http 服务
 	webUrlBase    string //web URL
 	dataUrlBase   string //data URL
+	buType        int    //业务系统类型,0:自己的V4平台,1:其它待定
 	userKeys      string //用户key,多个用,号隔开,目前由管理员id(高32)+用户ID组成(低32)
 	jtUserConfigs []JTUserConfigInfo
 }
@@ -108,6 +109,11 @@ func LoadSystemIni(configName string) bool {
 	if curConfig.dataUrlBase == "" {
 		curConfig.dataUrlBase = "http://127.0.0.1:7213"
 		iniParser.SetString("baseConfig", "dataUrlBase", curConfig.dataUrlBase)
+	}
+	curConfig.buType = int(iniParser.GetInt32("baseConfig", "buType", -1))
+	if curConfig.buType == -1 {
+		curConfig.buType = 0
+		iniParser.SetInt("baseConfig", "buType", int32(curConfig.buType))
 	}
 
 	curConfig.userKeys = iniParser.GetString("baseConfig", "userKeys", "")
@@ -245,4 +251,7 @@ func GetDataUrlBase() string {
 
 func GetJTUserConfig() []JTUserConfigInfo {
 	return SystemConf().jtUserConfigs
+}
+func GetBuType() int {
+	return SystemConf().buType
 }
