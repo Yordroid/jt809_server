@@ -39,7 +39,6 @@ func CrosHandler() gin.HandlerFunc {
 func InitRouter() *gin.Engine {
 	router := gin.New()
 	router.Use(CrosHandler(), gin.Logger(), gin.Recovery())
-	//lyztest TODO 开放时, 要去掉
 	webApi := router.Group("/jt809_api/v1/")
 	//	webApi.POST("/update_user_basic_info", apis.OnHandleUpdateUserBasicInfo)
 	webApi.POST("/platform_post_query_resp", apis.OnHandleWebRequestPlatformPostQueryResp)
